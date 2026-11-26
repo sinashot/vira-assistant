@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>دستیار ویراواکسن</title>
 <meta name="description" content="محصولات، دوز، گواهی‌نامه‌ها و راه‌های تماس با ویرا واکسن شایا">
+<meta name="robots" content="noindex, nofollow, noarchive">
 <link rel="icon" href="img/logo.png">
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <style>
@@ -429,6 +430,14 @@ const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const fa=n=>Number(n).toLocaleString("fa-IR");
 const tg=window.Telegram&&window.Telegram.WebApp&&window.Telegram.WebApp.initData!==undefined?window.Telegram.WebApp:null;
 const inTg=!!(tg&&tg.platform&&tg.platform!=="unknown");
+/* Telegram-only: outside Telegram show a lock screen (owner preview: add #preview to the URL) */
+if(!inTg&&location.hash!=="#preview"){
+  document.body.style.padding="0";
+  document.body.innerHTML=`<div style="min-height:100vh;display:grid;place-items:center;padding:24px;text-align:center;font-family:IRS,Tahoma,sans-serif">
+    <div><img src="img/logo.png" alt="" style="width:150px;margin:0 auto 18px"><h2 style="font-family:YB,IRS;font-size:20px">دستیار ویراواکسن</h2>
+    <p style="color:#626783;margin:8px 0 0">این صفحه فقط داخل تلگرام باز می‌شود.</p></div></div>`;
+  throw new Error("telegram-only");
+}
 const haptic=(k="light")=>{try{inTg&&tg.HapticFeedback.impactOccurred(k)}catch(e){}};
 const openLink=u=>{haptic();if(inTg){/^https:\/\/t\.me\//.test(u)?tg.openTelegramLink(u):tg.openLink(u)}else window.open(u,"_blank","noopener")};
 function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("on");clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove("on"),1800)}
