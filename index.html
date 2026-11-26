@@ -638,6 +638,10 @@ $("#lbImg").onclick=()=>$("#lb").classList.toggle("zoom");
 /* ================= contact ================= */
 $("#k-tel").onclick=()=>{haptic();copy("02192001125","شماره کپی شد: ۰۲۱۹۲۰۰۱۱۲۵");if(!inTg)location.href="tel:+982192001125"};
 $("#k-mail").onclick=()=>{haptic();copy("info@viravaccine.com","ایمیل کپی شد")};
+/* deep links: ?p=<product> or ?go=<tab>, also t.me/ViraVaccineBot?startapp=<product|tab> */
+(()=>{const q=new URLSearchParams(location.search);const sp=(inTg&&tg.initDataUnsafe&&tg.initDataUnsafe.start_param)||"";
+  const p=q.get("p")||(PRODUCTS.some(x=>x.id===sp)?sp:""),g=q.get("go")||(["products","calc","certs","contact"].includes(sp)?sp:"");
+  if(g)go(g,false);if(p){go("products",false);setTimeout(()=>openProduct(p),250)}})();
 $("#k-addr").onclick=()=>openLink("https://www.google.com/maps/search/?api=1&query="+encodeURIComponent("شهرک صنعتی سپهر نظرآباد البرز"));
 </script>
 </body>
