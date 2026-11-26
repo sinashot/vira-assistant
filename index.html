@@ -1,0 +1,635 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>دستیار ویراواکسن</title>
+<meta name="description" content="محصولات، دوز، گواهی‌نامه‌ها و راه‌های تماس با ویرا واکسن شایا">
+<link rel="icon" href="img/logo.png">
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+@font-face{font-family:IRS;src:url(fonts/IRANSansX-Medium.ttf) format("truetype");font-weight:400 500;font-display:swap}
+@font-face{font-family:IRS;src:url(fonts/IRANSansX-DemiBold.ttf) format("truetype");font-weight:600 700;font-display:swap}
+@font-face{font-family:YB;src:url(fonts/YekanBakh-Black.ttf) format("truetype");font-weight:900;font-display:swap}
+:root{
+  --bg:#F3F4FA;--card:#FFFFFF;--ink:#1A1C3A;--mute:#626783;--line:#E3E5F0;--soft:#ECEEF8;
+  --navy:#24205A;--mag:#D9246C;--cya:#11B4EA;--blu:#1763D6;--ok:#14996B;
+  --grad:linear-gradient(120deg,#5B1E6E 0%,#D9246C 45%,#1763D6 80%,#11B4EA 100%);
+  --sh:0 1px 2px rgba(26,28,58,.06),0 6px 22px rgba(26,28,58,.07);
+  --r:20px;color-scheme:light;
+}
+:root[data-theme="dark"]{
+  --bg:#0E1024;--card:#181B36;--ink:#EEF0FF;--mute:#A3A8C8;--line:#2A2E52;--soft:#20244A;
+  --navy:#B9B6FF;--sh:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);color-scheme:dark;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:IRS,Tahoma,sans-serif;font-size:15px;line-height:1.75}
+body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
+button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
+img{display:block;max-width:100%}
+h1,h2,h3{font-family:YB,IRS,sans-serif;font-weight:900;margin:0;line-height:1.35}
+.wrap{max-width:560px;margin:0 auto;padding:14px 16px 8px}
+.view{display:none;animation:in .32s ease}
+.view.on{display:block}
+@keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.card{background:var(--card);border-radius:var(--r);box-shadow:var(--sh);padding:16px}
+.sec{margin:22px 2px 10px;display:flex;align-items:center;justify-content:space-between}
+.sec h2{font-size:18px}
+.sec small{color:var(--mute)}
+.mute{color:var(--mute)}
+.num{font-feature-settings:"ss01"}
+
+/* top bar */
+.top{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.top .wrap{display:flex;align-items:center;gap:10px;padding-top:10px;padding-bottom:10px}
+.top .lg{width:46px;height:46px;border-radius:14px;background:#fff;display:grid;place-items:center;box-shadow:var(--sh);flex:none}
+.top .lg img{width:40px}
+.top b{font-family:YB;font-weight:900;font-size:17px;display:block;line-height:1.2}
+.top span{font-size:12px;color:var(--mute)}
+
+/* hero */
+.hero{position:relative;overflow:hidden;border-radius:26px;padding:22px 18px 18px;color:#fff;background:var(--grad);box-shadow:0 14px 34px rgba(91,30,110,.28)}
+.hero:before,.hero:after{content:"";position:absolute;border-radius:50%;background:rgba(255,255,255,.12)}
+.hero:before{width:220px;height:220px;left:-70px;top:-90px}
+.hero:after{width:150px;height:150px;left:40px;bottom:-95px;background:rgba(255,255,255,.08)}
+.hero .hi{font-size:14px;opacity:.9}
+.hero h1{font-size:24px;margin:4px 0 8px;position:relative}
+.hero p{margin:0;font-size:14px;opacity:.94;position:relative;max-width:92%}
+.hero .ribbon{position:absolute;left:-10px;top:12px;width:120px;opacity:.95;filter:drop-shadow(0 6px 14px rgba(0,0,0,.25))}
+.hero .cta{position:relative;margin-top:14px;display:flex;gap:8px;flex-wrap:wrap}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:9px 14px;border-radius:99px;background:#fff;color:#3A1650;font-weight:700;font-size:14px}
+.pill.ghost{background:rgba(255,255,255,.18);color:#fff;border:1px solid rgba(255,255,255,.35)}
+
+/* stats */
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.stat{background:var(--card);border-radius:18px;padding:14px;box-shadow:var(--sh)}
+.stat b{font-family:YB;font-size:26px;line-height:1.1;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;display:block}
+.stat span{font-size:12.5px;color:var(--mute);display:block;margin-top:4px;line-height:1.55}
+
+/* species finder */
+.seg{display:flex;background:var(--soft);border-radius:14px;padding:4px;gap:4px}
+.seg button{flex:1;padding:10px 6px;border-radius:11px;font-weight:600;font-size:14px;color:var(--mute);display:flex;align-items:center;justify-content:center;gap:6px;transition:.2s}
+.seg button.on{background:var(--card);color:var(--ink);box-shadow:var(--sh)}
+.mini{display:flex;gap:10px;overflow-x:auto;padding:12px 2px 4px;scroll-snap-type:x mandatory;scrollbar-width:none}
+.mini::-webkit-scrollbar{display:none}
+.mini .m{flex:none;width:150px;scroll-snap-align:start;background:var(--card);border-radius:18px;box-shadow:var(--sh);overflow:hidden;text-align:right}
+.mini .m .ph{height:92px;background:#fff;display:grid;place-items:center}
+.mini .m .ph img{max-height:86px}
+.mini .m div.t{padding:8px 10px 10px;font-size:13px}
+.mini .m b{display:block;font-size:14px}
+
+/* quick grid */
+.quick{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.quick button{background:var(--card);border-radius:18px;box-shadow:var(--sh);padding:12px 4px 10px;display:flex;flex-direction:column;align-items:center;gap:6px;font-size:12.5px;font-weight:600}
+.ic{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;color:#fff}
+.ic svg{width:22px;height:22px}
+
+/* accordion */
+.acc .it{border-top:1px solid var(--line)}
+.acc .it:first-child{border-top:0}
+.acc .hd{width:100%;display:flex;align-items:center;gap:10px;padding:13px 2px;text-align:right;font-weight:600}
+.acc .hd i{margin-inline-start:auto;transition:.25s;color:var(--mute);font-style:normal}
+.acc .it.open .hd i{transform:rotate(180deg)}
+.acc .bd{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s ease}
+.acc .it.open .bd{grid-template-rows:1fr}
+.acc .bd>div{overflow:hidden;color:var(--mute);font-size:14px}
+.acc .bd p{margin:0 0 12px}
+.dot{width:10px;height:10px;border-radius:50%;flex:none}
+
+/* products */
+.plist{display:grid;gap:14px}
+.prod{display:block;width:100%;text-align:right;background:var(--card);border-radius:22px;box-shadow:var(--sh);overflow:hidden;padding:0}
+.prod .ph{position:relative;background:#fff;height:170px;display:grid;place-items:center;border-bottom:1px solid var(--line)}
+.prod .ph img{max-height:160px}
+.prod .tag{position:absolute;top:12px;right:12px;font-size:12px;font-weight:700;color:#fff;padding:4px 10px;border-radius:99px}
+.prod .bd{padding:12px 14px 14px}
+.prod h3{font-size:18px}
+.prod .dz{font-size:13.5px;color:var(--mute);margin:2px 0 10px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:12.5px;padding:4px 10px;border-radius:99px;background:var(--soft);color:var(--ink);display:inline-flex;align-items:center;gap:5px}
+.filter{display:flex;gap:8px;margin-bottom:14px;overflow-x:auto;scrollbar-width:none}
+.filter button{flex:none;padding:8px 14px;border-radius:99px;background:var(--card);box-shadow:var(--sh);font-size:13.5px;font-weight:600;color:var(--mute)}
+.filter button.on{background:var(--navy);color:var(--card)}
+:root[data-theme="dark"] .filter button.on{background:#fff;color:#1A1C3A}
+
+/* sheet */
+.scrim{position:fixed;inset:0;background:rgba(10,12,30,.5);opacity:0;pointer-events:none;transition:.25s;z-index:40}
+.scrim.on{opacity:1;pointer-events:auto}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:41;max-height:92vh;overflow:auto;background:var(--card);border-radius:26px 26px 0 0;transform:translateY(105%);transition:transform .33s cubic-bezier(.2,.8,.2,1);padding-bottom:calc(18px + env(safe-area-inset-bottom))}
+.sheet.on{transform:none}
+.sheet .grab{width:44px;height:5px;border-radius:9px;background:var(--line);margin:10px auto 0}
+.sheet .in{max-width:560px;margin:0 auto;padding:6px 18px 0}
+.sheet .ph{background:#fff;border-radius:18px;margin:10px 0 14px;display:grid;place-items:center;border:1px solid var(--line)}
+.sheet .ph img{max-height:210px}
+.sheet h2{font-size:22px}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:14px 0}
+.fact{background:var(--soft);border-radius:14px;padding:10px 12px}
+.fact span{font-size:12px;color:var(--mute);display:block}
+.fact b{font-size:14px;font-weight:700;display:block;line-height:1.55}
+.fact.w{grid-column:1/-1}
+.sheet p{color:var(--mute);margin:0 0 10px;font-size:14.5px}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:14px;border-radius:16px;font-weight:700;font-size:15px;color:#fff;background:var(--grad);box-shadow:0 10px 24px rgba(217,36,108,.25)}
+.btn.sec2{background:var(--soft);color:var(--ink);box-shadow:none}
+.x{position:absolute;left:14px;top:14px;width:34px;height:34px;border-radius:50%;background:var(--soft);display:grid;place-items:center;font-size:18px}
+
+/* calculator */
+.field{margin-bottom:16px}
+.field>label{display:block;font-weight:600;font-size:14px;margin-bottom:8px}
+.vgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.vgrid button{background:var(--soft);border-radius:14px;padding:8px 4px;font-size:12.5px;font-weight:600;border:2px solid transparent;line-height:1.45}
+.vgrid button img{height:42px;margin:0 auto 4px;mix-blend-mode:multiply}
+:root[data-theme="dark"] .vgrid button img{mix-blend-mode:normal;background:#fff;border-radius:8px}
+.vgrid button.on{border-color:var(--mag);background:color-mix(in srgb,var(--mag) 9%,var(--card))}
+.stepper{display:flex;align-items:center;gap:10px}
+.stepper button{width:48px;height:48px;border-radius:14px;background:var(--soft);font-size:22px;font-weight:700;flex:none}
+.stepper input{flex:1;min-width:0;height:48px;border-radius:14px;border:2px solid var(--line);background:var(--card);color:var(--ink);text-align:center;font:inherit;font-size:22px;font-weight:700}
+.stepper input:focus{outline:0;border-color:var(--blu)}
+.quickn{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
+.quickn button{padding:5px 12px;border-radius:99px;background:var(--soft);font-size:13px}
+.tog{display:flex;align-items:center;gap:10px;font-size:14px}
+.sw{width:46px;height:28px;border-radius:99px;background:var(--line);position:relative;transition:.2s;flex:none}
+.sw:after{content:"";position:absolute;top:3px;right:3px;width:22px;height:22px;border-radius:50%;background:#fff;transition:.2s;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+.sw.on{background:var(--ok)}
+.sw.on:after{right:21px}
+.res{position:relative;overflow:hidden;border-radius:22px;padding:18px;color:#fff;background:var(--grad);margin-top:4px}
+.res .big{font-family:YB;font-size:30px;line-height:1.2}
+.res .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.res .box{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.28);border-radius:14px;padding:8px 12px;font-size:13px}
+.res .box b{display:block;font-size:17px}
+.res .nx{margin-top:12px;font-size:13.5px;background:rgba(0,0,0,.16);border-radius:12px;padding:10px 12px}
+.vials{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px}
+.vials i{width:16px;height:26px;border-radius:4px 4px 6px 6px;background:#fff;opacity:.92;position:relative;animation:pop .35s both}
+.vials i:before{content:"";position:absolute;top:-5px;left:3px;right:3px;height:6px;border-radius:2px;background:#F7B6D2}
+.vials i.big{width:20px;height:32px}
+@keyframes pop{from{transform:scale(.3);opacity:0}}
+.note{font-size:12.5px;color:var(--mute);margin-top:10px;line-height:1.7}
+
+/* certificates */
+.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.cert{background:var(--card);border-radius:18px;box-shadow:var(--sh);overflow:hidden;text-align:right;padding:0}
+.cert .ph{aspect-ratio:3/4;background:#fff;display:grid;place-items:center;overflow:hidden}
+.cert .ph img{width:100%;height:100%;object-fit:cover;object-position:top}
+.cert .t{padding:9px 11px 11px;font-size:13px;line-height:1.55}
+.cert .t b{display:block;font-size:13.5px}
+.cert .org{font-size:11px;font-weight:700;color:var(--blu);letter-spacing:.2px}
+.lb{position:fixed;inset:0;z-index:60;background:rgba(6,7,18,.94);display:none;flex-direction:column}
+.lb.on{display:flex}
+.lb .sc{flex:1;overflow:auto;display:grid;place-items:center;padding:56px 10px 10px}
+.lb img{max-height:calc(100vh - 170px);width:auto;max-width:100%;border-radius:6px;transition:.2s;cursor:zoom-in}
+.lb.zoom img{max-height:none;max-width:none;width:200%;cursor:zoom-out}
+.lb .bar{color:#fff;padding:12px 16px calc(14px + env(safe-area-inset-bottom));display:flex;align-items:center;gap:10px}
+.lb .bar div{flex:1;font-size:13.5px;line-height:1.6}
+.lb .nav{width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.14);color:#fff;font-size:20px}
+.lb .x{background:rgba(255,255,255,.16);color:#fff;top:12px;left:12px}
+
+/* contact */
+.clist .c{display:flex;align-items:center;gap:12px;padding:12px 2px;border-top:1px solid var(--line);width:100%;text-align:right}
+.clist .c:first-child{border-top:0}
+.clist .c div{flex:1;min-width:0}
+.clist .c span{display:block;font-size:12.5px;color:var(--mute)}
+.clist .c b{display:block;font-size:15px;word-break:break-word}
+.clist .c em{font-style:normal;font-size:12px;color:var(--blu);font-weight:700;flex:none}
+.soc{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.soc button{background:var(--card);border-radius:18px;box-shadow:var(--sh);padding:14px 6px;font-weight:600;font-size:13px;display:flex;flex-direction:column;align-items:center;gap:6px}
+
+/* tab bar */
+.tabs{position:fixed;bottom:0;left:0;right:0;z-index:30;background:color-mix(in srgb,var(--card) 92%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--line);padding:6px 6px calc(6px + env(safe-area-inset-bottom))}
+.tabs .wrap{display:flex;padding:0;max-width:560px}
+.tabs button{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11.5px;font-weight:600;color:var(--mute);padding:6px 0;border-radius:14px;position:relative}
+.tabs button svg{width:24px;height:24px}
+.tabs button.on{color:var(--mag)}
+.tabs button.on:before{content:"";position:absolute;top:-7px;width:28px;height:3px;border-radius:0 0 4px 4px;background:var(--grad)}
+.toast{position:fixed;left:50%;bottom:calc(96px + env(safe-area-inset-bottom));transform:translate(-50%,20px);background:var(--ink);color:var(--bg);padding:9px 16px;border-radius:99px;font-size:13.5px;opacity:0;transition:.25s;z-index:70;pointer-events:none}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.foot{text-align:center;font-size:12px;color:var(--mute);margin:26px 0 6px}
+</style>
+</head>
+<body>
+
+<header class="top"><div class="wrap">
+  <div class="lg"><img src="img/logo.png" alt="لوگوی ویرا واکسن"></div>
+  <div><b>دستیار ویراواکسن</b><span>ویرا واکسن شایا · تولیدکننده‌ی واکسن دامی</span></div>
+</div></header>
+
+<main class="wrap">
+
+<!-- HOME -->
+<section class="view on" id="v-home">
+  <div class="hero">
+    <div class="hi" id="hello">سلام، خوش آمدید 👋</div>
+    <h1>واکسن مطمئن،<br>گله‌ی سالم</h1>
+    <p>محصولات، دوز مصرف، گواهی‌نامه‌ها و راه‌های ارتباط با ویرا واکسن، همه یک‌جا.</p>
+    <div class="cta">
+      <button class="pill" data-go="calc">🧮 حساب دوز گله</button>
+      <button class="pill ghost" data-go="products">محصولات</button>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><b class="num" data-count="90" data-pre="+" data-suf="٪">۰</b><span>تأمین سالانه‌ی بازار داخلی واکسن‌های سبد محصول</span></div>
+    <div class="stat"><b class="num" data-count="5" data-suf=" سال">۰</b><span>برنده‌ی مناقصه‌های سازمان دامپزشکی، ۱۳۹۸ تا ۱۴۰۲</span></div>
+    <div class="stat"><b class="num" data-count="6" data-suf=" محصول">۰</b><span>واکسن و حلال برای دام سبک و سنگین</span></div>
+    <div class="stat"><b class="num" data-count="11" data-suf=" گواهی">۰</b><span>ISO، تأیید AU-PANVAC و مجوز صادرات</span></div>
+  </div>
+
+  <div class="sec"><h2>واکسن مناسب دامت</h2></div>
+  <div class="card" style="padding:12px">
+    <div class="seg" id="finder">
+      <button class="on" data-sp="small">🐑 گوسفند و بز</button>
+      <button data-sp="large">🐄 گاو و بوفالو</button>
+    </div>
+    <div class="mini" id="finderList"></div>
+  </div>
+
+  <div class="sec"><h2>دسترسی سریع</h2></div>
+  <div class="quick">
+    <button data-go="products"><span class="ic" style="background:#D9246C"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M10 3v4l-4 9a3 3 0 0 0 2.7 4.3h6.6A3 3 0 0 0 18 16l-4-9V3"/><path d="M7.5 13h9"/></svg></span>محصولات</button>
+    <button data-go="calc"><span class="ic" style="background:#1763D6"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="3" width="14" height="18" rx="3"/><path d="M8 7h8M8.5 12h.01M12 12h.01M15.5 12h.01M8.5 16h.01M12 16h.01M15.5 16h.01"/></svg></span>حساب دوز</button>
+    <button data-go="certs"><span class="ic" style="background:#5B1E6E"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="5"/><path d="M9 13.5 8 21l4-2 4 2-1-7.5"/></svg></span>گواهی‌ها</button>
+    <button data-go="contact"><span class="ic" style="background:#11B4EA"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg></span>تماس</button>
+  </div>
+
+  <div class="sec"><h2>درباره‌ی ویرا واکسن</h2></div>
+  <div class="card">
+    <p style="margin:0 0 6px">ویرا واکسن شایا در شهرک صنعتی سپهر نظرآباد، استان البرز، واکسن‌های دامی تولید می‌کند. محصولات شرکت از دام سبک و سنگین در برابر چهار بیماری مهم محافظت می‌کنند: طاعون نشخوارکنندگان کوچک، اکتیمای واگیر، لمپی اسکین و تب برفکی.</p>
+    <p style="margin:0" class="mute">هر سری ساخت، از ماده‌ی اولیه تا محصول نهایی، در آزمایشگاه جامع کنترل کیفیت شرکت آزمایش می‌شود. کیفیت واکسن‌ها را مرکز واکسن دامپزشکی اتحادیه‌ی آفریقا (AU-PANVAC) نیز تأیید کرده است.</p>
+  </div>
+
+  <div class="sec"><h2>واحدهای شرکت</h2></div>
+  <div class="card acc" id="units"></div>
+
+  <div class="foot">ویرا واکسن شایا · <span id="year"></span></div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="view" id="v-products">
+  <div class="sec" style="margin-top:6px"><h2>محصولات</h2><small>برای جزئیات بزنید</small></div>
+  <div class="filter" id="pfilter">
+    <button class="on" data-f="all">همه</button>
+    <button data-f="small">🐑 گوسفند و بز</button>
+    <button data-f="large">🐄 گاو و بوفالو</button>
+    <button data-f="fmd">تب برفکی</button>
+  </div>
+  <div class="plist" id="plist"></div>
+</section>
+
+<!-- CALCULATOR -->
+<section class="view" id="v-calc">
+  <div class="sec" style="margin-top:6px"><h2>حساب دوز گله</h2></div>
+  <div class="card">
+    <div class="field"><label>۱. واکسن</label><div class="vgrid" id="cv"></div></div>
+    <div class="field" id="cspWrap"><label>۲. نوع دام</label><div class="seg" id="csp"></div></div>
+    <div class="field"><label id="cnl">۳. تعداد رأس</label>
+      <div class="stepper"><button id="cminus" aria-label="کم کن">−</button><input id="cn" inputmode="numeric" value="100" aria-label="تعداد رأس"><button id="cplus" aria-label="زیاد کن">+</button></div>
+      <div class="quickn" id="cquick"></div>
+    </div>
+    <div class="field" style="margin-bottom:0"><button class="tog" id="cwaste"><span class="sw" id="cwsw"></span>۱۰٪ ذخیره برای اتلاف هنگام تزریق</button></div>
+  </div>
+  <div class="res" id="cres" style="margin-top:14px"></div>
+  <div class="note">محاسبه بر اساس دوز درج‌شده در بروشور و سایت رسمی شرکت است. پیش از مصرف بروشور داخل جعبه را بخوانید و برنامه‌ی واکسیناسیون را با دامپزشک هماهنگ کنید.</div>
+</section>
+
+<!-- CERTIFICATES -->
+<section class="view" id="v-certs">
+  <div class="sec" style="margin-top:6px"><h2>گواهی‌نامه‌ها و مجوزها</h2><small id="ccount"></small></div>
+  <div class="filter" id="cfilter">
+    <button class="on" data-f="all">همه</button>
+    <button data-f="iso">استاندارد ISO</button>
+    <button data-f="panvac">AU-PANVAC</button>
+    <button data-f="export">صادرات</button>
+  </div>
+  <div class="cgrid" id="cgrid"></div>
+</section>
+
+<!-- CONTACT -->
+<section class="view" id="v-contact">
+  <div class="sec" style="margin-top:6px"><h2>ارتباط با ما</h2></div>
+  <div class="card clist">
+    <button class="c" id="k-tel"><span class="ic" style="background:#D9246C"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg></span><div><span>تلفن</span><b class="num" dir="ltr" style="text-align:right">۰۲۱ - ۹۲۰۰۱۱۲۵</b></div><em>تماس</em></button>
+    <button class="c" id="k-mail"><span class="ic" style="background:#1763D6"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7 8 6 8-6"/></svg></span><div><span>ایمیل</span><b dir="ltr" style="text-align:right">info@viravaccine.com</b></div><em>کپی</em></button>
+    <button class="c" id="k-addr"><span class="ic" style="background:#5B1E6E"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.6"/></svg></span><div><span>نشانی کارخانه</span><b>البرز، نظرآباد، شهرک صنعتی سپهر</b></div><em>نقشه</em></button>
+  </div>
+
+  <div class="sec"><h2>شبکه‌های اجتماعی</h2></div>
+  <div class="soc">
+    <button data-link="https://instagram.com/viravaccine"><span class="ic" style="background:linear-gradient(45deg,#F9A13A,#D9246C,#7A2FD0)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".9" fill="currentColor"/></svg></span>اینستاگرام</button>
+    <button data-link="https://www.linkedin.com/company/vira-vaccine-shaya/"><span class="ic" style="background:#0A66C2"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.5 8.5H3.6V20h2.9zM5 3.8a1.7 1.7 0 1 0 0 3.4 1.7 1.7 0 0 0 0-3.4M20.4 13.4c0-3.1-1.7-4.6-3.9-4.6-1.8 0-2.6 1-3 1.7V8.5h-2.9V20h2.9v-6c0-1.6.3-3.1 2.3-3.1s2 1.8 2 3.2V20h2.9z"/></svg></span>لینکدین</button>
+    <button data-link="https://viravaccine.ir/"><span class="ic" style="background:#24205A"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></span>وب‌سایت</button>
+  </div>
+
+  <div class="sec"><h2>کاتالوگ محصولات</h2></div>
+  <button class="btn" data-link="https://viravaccine.ir/wp-content/uploads/2023/06/Viravaccine-Catalog.pdf">📄 دریافت کاتالوگ PDF</button>
+
+  <div class="sec"><h2>نماینده‌های استانی</h2></div>
+  <div class="card"><p style="margin:0" class="mute">فهرست نماینده‌های پخش هر استان به‌زودی در همین بخش قرار می‌گیرد. تا آن زمان برای پیدا کردن نزدیک‌ترین نماینده با دفتر فروش تماس بگیرید.</p></div>
+</section>
+
+</main>
+
+<nav class="tabs"><div class="wrap">
+  <button class="on" data-go="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11.5 12 4l8 7.5V20a1 1 0 0 1-1 1h-4.5v-6h-5v6H5a1 1 0 0 1-1-1z"/></svg>خانه</button>
+  <button data-go="products"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M10 3v4l-4 9a3 3 0 0 0 2.7 4.3h6.6A3 3 0 0 0 18 16l-4-9V3"/><path d="M7.5 13h9"/></svg>محصولات</button>
+  <button data-go="calc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="3" width="14" height="18" rx="3"/><path d="M8 7h8M8.5 12h.01M12 12h.01M15.5 12h.01M8.5 16h.01M12 16h.01M15.5 16h.01"/></svg>حساب دوز</button>
+  <button data-go="certs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="5"/><path d="M9 13.5 8 21l4-2 4 2-1-7.5"/></svg>گواهی‌ها</button>
+  <button data-go="contact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>تماس</button>
+</div></nav>
+
+<div class="scrim" id="scrim"></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true"><div class="grab"></div><button class="x" id="sheetX" aria-label="بستن">✕</button><div class="in" id="sheetIn"></div></div>
+<div class="lb" id="lb"><button class="x" id="lbX" aria-label="بستن">✕</button><div class="sc" id="lbSc"><img id="lbImg" alt=""></div><div class="bar"><button class="nav" id="lbNext" aria-label="بعدی">›</button><div id="lbCap"></div><button class="nav" id="lbPrev" aria-label="قبلی">‹</button></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ================= DATA (from viravaccine.ir, typos corrected) ================= */
+const SP = {small:"گوسفند و بز", large:"گاو و بوفالو"};
+const PRODUCTS = [
+ {id:"peste", name:"ویرا-پست®", en:"Vira-Peste", img:"PPR-Viravaccine.jpg", color:"#2E8B57",
+  disease:"طاعون نشخوارکنندگان کوچک (PPR)", alias:"طاعون بزی", sp:["small"], fmd:false,
+  form:"لیوفیلیزه (پودر خشک)، با حلال", route:"زیرجلدی",
+  dose:{small:{v:1, u:"dose", label:"۱ دوز (۱ میلی‌لیتر)"}},
+  pack:{u:"dose", sizes:[100], name:"ویال ۱۰۰ دوزی"},
+  every:12, everyTxt:"سالانه، پیش از فصل بارندگی",
+  immune:"ایمنی ۲۱ روز پس از تزریق",
+  strain:"سویه‌ی واکسینال Nigeria 75/1",
+  text:["طاعون نشخوارکنندگان کوچک یا «طاعون بزی» بیماری ویروسی حاد و کشنده‌ای با واگیری بسیار بالاست. عامل آن موربیلی‌ویروس از خانواده‌ی پارامیکسوویریده است و نشخوارکنندگان کوچک و شترها را درگیر می‌کند.",
+        "مؤثرترین راه کنترل این بیماری واکسیناسیون است که در مناطق آلوده باید هر سال پیش از فصل بارندگی تکرار شود. ۲۱ روز پس از تزریق، بدن دام در برابر همه‌ی سروتیپ‌های شناخته‌شده‌ی ویروس PPR برای مدت طولانی ایمن می‌شود."]},
+ {id:"ecty", name:"ویرا-اکتی‌وکس®", en:"Vira-EctyVax", img:"Ecthyma-Viravaccine.jpg", color:"#C2410C",
+  disease:"اکتیمای واگیر (Orf)", alias:"قابل انتقال به انسان", sp:["small"], fmd:false,
+  form:"لیوفیلیزه، با اپلیکاتور اختصاصی", route:"تخریشی (دو خراش روی پوست)",
+  dose:{small:{v:1, u:"dose", label:"۱ دوز (دو خراش)"}},
+  pack:{u:"dose", sizes:[50], name:"ویال ۵۰ دوزی"},
+  every:6, everyTxt:"هر ۶ ماه یک بار",
+  immune:"هر پمپاژ نصف دوز (۳۰ میکرولیتر)",
+  strain:"سویه‌ی بومی",
+  text:["اکتیمای واگیر بیماری ویروسی پوستی با قدرت سرایت بالاست که عامل آن ویروس Orf از خانواده‌ی پاکس‌ویریده است. این بیماری معمولاً گوسفند و بز را مبتلا می‌کند و به انسان هم منتقل می‌شود.",
+        "واکسن با دو خراش روی پوست بدون موی سطح داخلی ران یا زیر بغل و با اپلیکاتور اختصاصی تلقیح می‌شود. هر پمپاژ نصف دوز (۳۰ میکرولیتر) روی محل خراش می‌ریزد، پس دو خراش دقیقاً یک دوز کامل است. اپلیکاتور نو و قابل استفاده‌ی دوباره همراه واکسن ارائه می‌شود."]},
+ {id:"lumpy", name:"ویرا-لمپی‌وکس®", en:"Vira-LumpyVax", img:"LSD-BOX-Viravaccine.jpg", color:"#6D28D9",
+  disease:"لمپی اسکین (LSD)", alias:"ندول‌های پوستی در گاو", sp:["large"], fmd:false,
+  form:"لیوفیلیزه (پودر خشک)، با حلال", route:"زیرجلدی",
+  dose:{large:{v:1, u:"dose", label:"۱ دوز (۱ میلی‌لیتر)"}},
+  pack:{u:"dose", sizes:[25,50,100], name:"ویال ۲۵، ۵۰ و ۱۰۰ دوزی"},
+  every:12, everyTxt:"سالانه",
+  immune:"ایمنی یک‌ساله",
+  strain:"سویه‌ی واکسینال Neethling",
+  text:["بیماری لمپی اسکین را ویروسی از خانواده‌ی پاکس‌ویریده ایجاد می‌کند و باعث ندول‌های پوستی نکروتیک در گاو و بوفالوی آبی می‌شود. کنترل و ریشه‌کنی این بیماری به واکسیناسیون سریع و گسترده و تشخیص زودهنگام بستگی دارد.",
+        "یک دوز (۱ میلی‌لیتر) زیرجلدی به گاو و بوفالو تزریق می‌شود و با تولید آنتی‌بادی، دام را یک سال در برابر لمپی اسکین ایمن می‌کند."]},
+ {id:"afto", name:"ویرا-آفتووکس®", en:"Vira-AftoVax", img:"FMD-AftoVax-Viravaccine.jpg", color:"#1763D6",
+  disease:"تب برفکی (FMD)", alias:"واکسن کشته با ادجوانت آلومینیوم", sp:["small","large"], fmd:true,
+  form:"سوسپانسیون تزریقی غیرفعال", route:"زیرجلدی",
+  dose:{small:{v:1, u:"ml", label:"۱ میلی‌لیتر"}, large:{v:5, u:"ml", label:"۵ میلی‌لیتر"}},
+  pack:{u:"ml", sizes:[100,250], name:"بطری ۱۰۰ و ۲۵۰ میلی‌لیتری"},
+  every:4, everyTxt:"هر ۴ ماه یک بار",
+  immune:"حداقل 6PD50 در هر دوز",
+  strain:"سویه‌های A05IR، AGVII، Asia1 و O-PanAsia-2",
+  text:["سوسپانسیون تزریقی غیرفعال‌شده با ادجوانت هیدروکسید آلومینیوم و ساپونین. هر دوز دست‌کم 6PD50 (دوز محافظت‌کننده) ویروس کشته‌شده‌ی تب برفکی از سویه‌های A05IR، AGVII، Asia1 و O-PanAsia-2 دارد.",
+        "تزریق زیرجلدی است: ۱ میلی‌لیتر برای گوسفند و بز، ۵ میلی‌لیتر برای گاو و گوساله، هر چهار ماه یک بار."]},
+ {id:"aftol", name:"ویرا-آفتووکسول®", en:"Vira-AftoVaxol", img:"FMD-AftoVaxol-Viravaccine.jpg", color:"#0E7490",
+  disease:"تب برفکی (FMD)", alias:"واکسن روغنی با ماندگاری بیشتر", sp:["small","large"], fmd:true,
+  form:"امولسیون تزریقی غیرفعال با ادجوانت روغنی", route:"زیرجلدی یا عضلانی",
+  dose:{small:{v:1, u:"ml", label:"۱ میلی‌لیتر"}, large:{v:3, u:"ml", label:"۳ میلی‌لیتر"}},
+  pack:{u:"ml", sizes:[100,250], name:"بطری ۱۰۰ و ۲۵۰ میلی‌لیتری"},
+  every:6, everyTxt:"هر ۶ ماه یک بار",
+  immune:"حداقل 6PD50 در هر دوز",
+  strain:"سویه‌های A05IR، AGVII، Asia1 و O-PanAsia-2",
+  text:["امولسیون تزریقی غیرفعال‌شده با ادجوانت روغنی. هر دوز دست‌کم 6PD50 ویروس کشته‌شده‌ی تب برفکی از سویه‌های A05IR، AGVII، Asia1 و O-PanAsia-2 دارد.",
+        "تزریق زیرجلدی یا عضلانی است: ۱ میلی‌لیتر برای گوسفند و بز، ۳ میلی‌لیتر برای گاو و گوساله، هر شش ماه یک بار. فاصله‌ی نوبت‌ها از نوع آبی (آفتووکس) طولانی‌تر است."]},
+ {id:"norlin", name:"ویرا-نورلین®", en:"Vira-Norlin", img:"Norlin-Viravaccine.jpg", color:"#64748B",
+  disease:"حلال استریل واکسن‌های لیوفیلیزه", alias:"سدیم کلراید ۰٫۹٪", sp:["small","large"], fmd:false, diluent:true,
+  form:"محلول استریل سدیم کلراید ۰٫۹٪", route:"برای حل کردن واکسن",
+  pack:{u:"ml", sizes:[25,50,100], name:"بطری ۲۵، ۵۰ و ۱۰۰ میلی‌لیتری"},
+  everyTxt:"همراه هر ویال واکسن لیوفیلیزه",
+  immune:"یک بطری برای هر ویال",
+  text:["ویرا-نورلین® حلال استریل سدیم کلراید ۰٫۹ درصد است که در ویرا واکسن شایا برای واکسن‌های لیوفیلیزه‌ی دامی تولید می‌شود.",
+        "برای آماده کردن واکسن، طبق بروشور یک بطری نورلین در یک ویال واکسن لیوفیلیزه حل می‌شود. نورلین همراه با ویرا-پست، ویرا-اکتی‌وکس و ویرا-لمپی‌وکس ارائه می‌شود."]}
+];
+const CERTS = [
+ {f:"c1", cat:"iso", org:"CSQ · IQNet", t:"ISO 9001:2015", d:"سیستم مدیریت کیفیت؛ طراحی و تولید واکسن دامی"},
+ {f:"c4", cat:"iso", org:"QM Certificate", t:"ISO 9001:2015", d:"سیستم مدیریت کیفیت"},
+ {f:"c2", cat:"iso", org:"CSQ · IQNet", t:"ISO 14001:2015", d:"سیستم مدیریت محیط زیست"},
+ {f:"c3", cat:"iso", org:"CSQ · IQNet", t:"ISO 45001:2018", d:"سیستم مدیریت ایمنی و بهداشت شغلی"},
+ {f:"c5", cat:"iso", org:"QM Certificate", t:"ISO 45001:2018", d:"سیستم مدیریت ایمنی و بهداشت شغلی"},
+ {f:"c8", cat:"panvac", org:"AU-PANVAC", t:"گواهی کیفیت ویرا-لمپی‌وکس®", d:"مرکز واکسن دامپزشکی اتحادیه‌ی آفریقا"},
+ {f:"c7", cat:"panvac", org:"AU-PANVAC", t:"گزارش آزمون لمپی‌وکس", d:"آزمون‌های استریلیتی، ایمنی، قدرت، هویت و پایداری"},
+ {f:"c10", cat:"panvac", org:"AU-PANVAC", t:"گواهی کیفیت ویرا-پست®", d:"مرکز واکسن دامپزشکی اتحادیه‌ی آفریقا"},
+ {f:"c9", cat:"panvac", org:"AU-PANVAC", t:"گزارش آزمون ویرا-پست®", d:"آزمون‌های استریلیتی، ایمنی، قدرت، هویت و پایداری"},
+ {f:"c11", cat:"panvac", org:"AU-PANVAC", t:"گزارش آزمون ویرا-نورلین®", d:"آزمون استریلیتی حلال"},
+ {f:"c6", cat:"export", org:"وزارت کشاورزی عراق", t:"تأیید محل تولید (عراق)", d:"گواهی اعتبار سایت تولید برای صادرات"}
+];
+const UNITS = [
+ {c:"#D9246C", t:"کنترل کیفیت", p:["آزمایشگاه جامع کنترل کیفیت از شهریور ۱۳۹۷ راه افتاده و بخش‌های مولکولی، میکروبی، سلولی، سرولوژی، کنترل حین تولید، حیوان‌خانه و مزرعه‌ی نگهداری دام سبک و سنگین دارد.","هر ماده‌ی اولیه پیش از ورود به تولید طبق مرجع‌های معتبر مثل USP و EP آزمایش می‌شود. همه‌ی مراحل تولید زیر نظر کارشناسان کنترل است و محصول نهایی طبق استانداردهای WOAH و آزمون‌های پایداری تأیید می‌شود."]},
+ {c:"#5B1E6E", t:"تضمین کیفیت", p:["تضمین کیفیت مطمئن می‌شود فرایندهای تولید همیشه یکسان و تحت کنترل انجام شوند: احراز کیفیت طراحی، نصب، عملکرد و کارایی تجهیزات (DQ، IQ، OQ، PQ)، کالیبراسیون دوره‌ای و معتبرسازی فرایندها و روش‌های آنالیز.","این واحد الزامات راهنماهای بین‌المللی مثل ICH، WHO، PIC/S و FDA را دنبال می‌کند."]},
+ {c:"#1763D6", t:"فنی و مهندسی", p:["طراحی، نصب، تعمیر و نگهداری همه‌ی دستگاه‌های تولید و تأسیسات، با برنامه‌ی نگهداری پیشگیرانه (PM) تا تولید کمترین وقفه را داشته باشد. همه‌ی دستگاه‌ها بر پایه‌ی اصول GMP طراحی و ساخته شده‌اند."]},
+ {c:"#11B4EA", t:"زنجیره‌ی تأمین", p:["تأمین مواد اولیه، تجهیزات و اقلام بسته‌بندی با بهترین کیفیت و مناسب‌ترین قیمت، مستقیم و بدون واسطه از تأمین‌کنندگان معتبر داخلی و خارجی."]},
+ {c:"#14996B", t:"فروش داخلی و پایش پس از مصرف", p:["ویرا واکسن هر سال بیش از ۹۰ درصد بازار داخلی واکسن‌های سبد محصولش را تأمین می‌کند و در سال‌های ۱۳۹۸ تا ۱۴۰۲ برنده‌ی مناقصه‌های سازمان دامپزشکی کشور در واکسن‌های PPR، لمپی اسکین و تب برفکی بوده است.","تیمی از کلینیسین‌های باتجربه با حضور میدانی، کارایی واکسن‌های تزریق‌شده را در سراسر کشور پایش می‌کنند (PMS). نمایندگان پخش استانی با ضوابط مشخص انتخاب می‌شوند."]},
+ {c:"#C2410C", t:"صادرات", p:["واحد صادرات از سال ۱۴۰۰ به‌طور رسمی فعالیت می‌کند. تمرکز آن بازار کشورهای همسایه و کشورهای آسیایی و آفریقایی است و برای هر کشور هدف، تحلیل بازار و برنامه‌ی عملیاتی جداگانه دارد."]}
+];
+
+/* ================= helpers ================= */
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const fa=n=>Number(n).toLocaleString("fa-IR");
+const tg=window.Telegram&&window.Telegram.WebApp&&window.Telegram.WebApp.initData!==undefined?window.Telegram.WebApp:null;
+const inTg=!!(tg&&tg.platform&&tg.platform!=="unknown");
+const haptic=(k="light")=>{try{inTg&&tg.HapticFeedback.impactOccurred(k)}catch(e){}};
+const openLink=u=>{haptic();if(inTg){/^https:\/\/t\.me\//.test(u)?tg.openTelegramLink(u):tg.openLink(u)}else window.open(u,"_blank","noopener")};
+function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("on");clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove("on"),1800)}
+function copy(txt,msg){const done=()=>toast(msg||"کپی شد");if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(done,()=>fallback())}else fallback();function fallback(){const a=document.createElement("textarea");a.value=txt;document.body.appendChild(a);a.select();try{document.execCommand("copy");done()}catch(e){toast(txt)}a.remove()}}
+const spIcon={small:"🐑",large:"🐄"};
+const persianDate=d=>new Intl.DateTimeFormat("fa-IR-u-ca-persian",{day:"numeric",month:"long",year:"numeric"}).format(d);
+
+/* ================= theme & telegram ================= */
+function applyTheme(){
+  let dark;
+  if(inTg) dark=tg.colorScheme==="dark"; else dark=window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches;
+  document.documentElement.setAttribute("data-theme",dark?"dark":"light");
+  if(inTg){try{const bg=getComputedStyle(document.documentElement).getPropertyValue("--bg").trim();tg.setHeaderColor(bg);tg.setBackgroundColor(bg);tg.setBottomBarColor&&tg.setBottomBarColor(bg)}catch(e){}}
+}
+applyTheme();
+if(inTg){
+  tg.ready();tg.expand();
+  tg.onEvent("themeChanged",applyTheme);
+  const u=tg.initDataUnsafe&&tg.initDataUnsafe.user;
+  if(u&&u.first_name)$("#hello").textContent=`سلام ${u.first_name}، خوش آمدید 👋`;
+  tg.BackButton.onClick(()=>back());
+}else if(window.matchMedia){matchMedia("(prefers-color-scheme: dark)").addEventListener("change",applyTheme)}
+$("#year").textContent=new Intl.DateTimeFormat("fa-IR-u-ca-persian",{year:"numeric"}).format(new Date());
+
+/* ================= navigation ================= */
+let cur="home";const stack=[];
+function go(v,push=true){
+  if(v===cur)return;
+  if(push)stack.push(cur);
+  cur=v;haptic("soft");
+  $$(".view").forEach(s=>s.classList.toggle("on",s.id==="v-"+v));
+  $$(".tabs button").forEach(b=>b.classList.toggle("on",b.dataset.go===v));
+  window.scrollTo({top:0,behavior:"instant"});
+  syncBack();
+  if(v==="home")countUp();
+}
+function back(){
+  if($("#lb").classList.contains("on"))return closeLb();
+  if($("#sheet").classList.contains("on"))return closeSheet();
+  const p=stack.pop();if(p)go(p,false);
+}
+function syncBack(){if(!inTg)return;const open=$("#lb").classList.contains("on")||$("#sheet").classList.contains("on")||stack.length;open?tg.BackButton.show():tg.BackButton.hide()}
+document.addEventListener("click",e=>{
+  const g=e.target.closest("[data-go]");if(g){if(g.closest(".tabs"))stack.length=0;go(g.dataset.go);if(g.closest(".tabs"))syncBack();}
+  const l=e.target.closest("[data-link]");if(l)openLink(l.dataset.link);
+});
+
+/* count-up stats */
+function countUp(){
+  $$("[data-count]").forEach(el=>{
+    const end=+el.dataset.count,pre=el.dataset.pre||"",suf=el.dataset.suf||"";const t0=performance.now();
+    const step=t=>{const k=Math.min(1,(t-t0)/900),e=1-Math.pow(1-k,3);el.textContent=pre+fa(Math.round(end*e))+suf;if(k<1)requestAnimationFrame(step)};
+    requestAnimationFrame(step);
+  });
+}
+countUp();
+
+/* ================= home: finder + units ================= */
+function renderFinder(sp){
+  $("#finderList").innerHTML=PRODUCTS.filter(p=>p.sp.includes(sp)&&!p.diluent).map(p=>`
+   <button class="m" data-prod="${p.id}"><div class="ph"><img src="img/${p.img}" alt="${p.name}" loading="lazy"></div>
+   <div class="t"><b>${p.name}</b><span class="mute">${p.disease}</span></div></button>`).join("");
+}
+$("#finder").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;haptic();$$("#finder button").forEach(x=>x.classList.toggle("on",x===b));renderFinder(b.dataset.sp)});
+renderFinder("small");
+$("#units").innerHTML=UNITS.map((u,i)=>`<div class="it"><button class="hd"><span class="dot" style="background:${u.c}"></span>${u.t}<i>⌄</i></button><div class="bd"><div>${u.p.map(x=>`<p>${x}</p>`).join("")}</div></div></div>`).join("");
+$("#units").addEventListener("click",e=>{const h=e.target.closest(".hd");if(!h)return;haptic();h.parentElement.classList.toggle("open")});
+
+/* ================= products ================= */
+function chipsFor(p){
+  const c=[];p.sp.forEach(s=>c.push(`<span class="chip">${spIcon[s]} ${SP[s]}</span>`));
+  c.push(`<span class="chip">⏱ ${p.everyTxt}</span>`);
+  return c.join("");
+}
+function renderProducts(f){
+  const list=PRODUCTS.filter(p=>f==="all"||(f==="fmd"?p.fmd:p.sp.includes(f)));
+  $("#plist").innerHTML=list.map(p=>`
+   <button class="prod" data-prod="${p.id}">
+     <div class="ph"><img src="img/${p.img}" alt="${p.name}" loading="lazy"><span class="tag" style="background:${p.color}">${p.diluent?"حلال":p.disease.replace(/ \(.*\)/,"")}</span></div>
+     <div class="bd"><h3>${p.name}</h3><div class="dz">${p.disease} · ${p.alias}</div><div class="chips">${chipsFor(p)}</div></div>
+   </button>`).join("");
+}
+$("#pfilter").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;haptic();$$("#pfilter button").forEach(x=>x.classList.toggle("on",x===b));renderProducts(b.dataset.f)});
+renderProducts("all");
+document.addEventListener("click",e=>{const b=e.target.closest("[data-prod]");if(b)openProduct(b.dataset.prod)});
+
+function openProduct(id){
+  const p=PRODUCTS.find(x=>x.id===id);haptic();
+  const doseFacts=p.dose?Object.entries(p.dose).map(([s,d])=>`<div class="fact"><span>دوز ${SP[s]}</span><b>${d.label}</b></div>`).join(""):"";
+  $("#sheetIn").innerHTML=`
+   <div class="ph"><img src="img/${p.img}" alt="${p.name}"></div>
+   <h2>${p.name}</h2><div class="mute" style="font-size:13px" dir="ltr">${p.en}</div>
+   <div class="facts">
+     <div class="fact w"><span>بیماری</span><b>${p.disease}</b></div>
+     ${doseFacts}
+     <div class="fact"><span>روش مصرف</span><b>${p.route}</b></div>
+     <div class="fact"><span>نوبت تکرار</span><b>${p.everyTxt}</b></div>
+     <div class="fact"><span>بسته‌بندی</span><b>${p.pack.name}</b></div>
+     <div class="fact"><span>${p.diluent?"مصرف":"ایمنی"}</span><b>${p.immune}</b></div>
+     <div class="fact w"><span>شکل دارویی</span><b>${p.form}${p.strain?" · "+p.strain:""}</b></div>
+   </div>
+   ${p.text.map(t=>`<p>${t}</p>`).join("")}
+   <div style="display:grid;gap:8px;margin-top:16px">
+     ${p.diluent?"":`<button class="btn" id="toCalc">🧮 برای گله‌ام حساب کن</button>`}
+     <button class="btn sec2" data-go="contact" id="toContact">📞 سفارش و مشاوره</button>
+   </div>`;
+  const tc=$("#toCalc");if(tc)tc.onclick=()=>{closeSheet();calc.v=p.id;calc.sp=p.sp[0];renderCalc();go("calc")};
+  $("#toContact").addEventListener("click",()=>closeSheet());
+  openSheet();
+}
+function openSheet(){$("#scrim").classList.add("on");$("#sheet").classList.add("on");$("#sheet").scrollTop=0;syncBack()}
+function closeSheet(){$("#scrim").classList.remove("on");$("#sheet").classList.remove("on");syncBack()}
+$("#scrim").onclick=closeSheet;$("#sheetX").onclick=closeSheet;
+/* swipe down to close */
+(()=>{let y0=null;const s=$("#sheet");s.addEventListener("touchstart",e=>{y0=s.scrollTop<=0?e.touches[0].clientY:null},{passive:true});s.addEventListener("touchmove",e=>{if(y0==null)return;const d=e.touches[0].clientY-y0;if(d>0)s.style.transform=`translateY(${d}px)`},{passive:true});s.addEventListener("touchend",e=>{if(y0==null)return;const d=e.changedTouches[0].clientY-y0;s.style.transform="";if(d>110)closeSheet();y0=null})})();
+
+/* ================= calculator ================= */
+const calc={v:"peste",sp:"small",n:100,waste:false};
+const CALCABLE=PRODUCTS.filter(p=>!p.diluent);
+$("#cv").innerHTML=CALCABLE.map(p=>`<button data-v="${p.id}"><img src="img/${p.img}" alt="">${p.name.replace("®","")}</button>`).join("");
+$("#cv").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;haptic();calc.v=b.dataset.v;const p=PRODUCTS.find(x=>x.id===calc.v);if(!p.sp.includes(calc.sp))calc.sp=p.sp[0];renderCalc()});
+$("#csp").addEventListener("click",e=>{const b=e.target.closest("button");if(!b||b.disabled)return;haptic();calc.sp=b.dataset.sp;renderCalc()});
+const nIn=$("#cn");
+const setN=n=>{calc.n=Math.max(1,Math.min(100000,Math.round(n)||1));nIn.value=fa(calc.n).replace(/٬/g,"");computeCalc()};
+const parseN=s=>+String(s).replace(/[۰-۹]/g,d=>"۰۱۲۳۴۵۶۷۸۹".indexOf(d)).replace(/[٠-٩]/g,d=>"٠١٢٣٤٥٦٧٨٩".indexOf(d)).replace(/[^\d]/g,"");
+nIn.addEventListener("input",()=>{const n=parseN(nIn.value);calc.n=Math.max(0,Math.min(100000,n));computeCalc()});
+nIn.addEventListener("blur",()=>setN(calc.n));
+nIn.addEventListener("focus",()=>nIn.select());
+const stepFor=()=>calc.n>=1000?100:calc.n>=200?50:10;
+$("#cminus").onclick=()=>{haptic();setN(calc.n-stepFor())};
+$("#cplus").onclick=()=>{haptic();setN(calc.n+stepFor())};
+$("#cquick").innerHTML=[50,100,250,500,1000].map(n=>`<button data-n="${n}">${fa(n)} رأس</button>`).join("");
+$("#cquick").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;haptic();setN(+b.dataset.n)});
+$("#cwaste").onclick=()=>{haptic();calc.waste=!calc.waste;$("#cwsw").classList.toggle("on",calc.waste);computeCalc()};
+
+function renderCalc(){
+  const p=PRODUCTS.find(x=>x.id===calc.v);
+  $$("#cv button").forEach(b=>b.classList.toggle("on",b.dataset.v===calc.v));
+  $("#csp").innerHTML=["small","large"].map(s=>`<button data-sp="${s}" class="${s===calc.sp?"on":""}" ${p.sp.includes(s)?"":"disabled style='opacity:.35'"}>${spIcon[s]} ${SP[s]}</button>`).join("");
+  $("#cnl").textContent=`۳. تعداد ${calc.sp==="large"?"گاو و بوفالو":"گوسفند و بز"} (رأس)`;
+  computeCalc();
+}
+/* smallest total capacity >= need, then fewest packages */
+function bestPack(need,sizes){
+  if(need<=0)return{total:0,counts:{}};
+  const max=Math.max(...sizes),lim=need+max,INF=1e9;
+  const cnt=new Int32Array(lim+1).fill(INF),from=new Int32Array(lim+1).fill(-1);cnt[0]=0;
+  for(let c=1;c<=lim;c++)for(const s of sizes)if(c>=s&&cnt[c-s]+1<cnt[c]){cnt[c]=cnt[c-s]+1;from[c]=s}
+  let best=-1;for(let c=need;c<=lim;c++)if(cnt[c]<INF){best=c;break}
+  const counts={};let c=best;while(c>0){const s=from[c];counts[s]=(counts[s]||0)+1;c-=s}
+  return{total:best,counts};
+}
+function computeCalc(){
+  const p=PRODUCTS.find(x=>x.id===calc.v),d=p.dose[calc.sp];
+  const heads=calc.n,need=Math.ceil(heads*d.v*(calc.waste?1.1:1));
+  const r=bestPack(need,p.pack.sizes);
+  const unit=p.pack.u==="ml"?"میلی‌لیتر":"دوز";
+  const pk=p.pack.u==="ml"?"بطری":"ویال";
+  const sizesDesc=Object.keys(r.counts).map(Number).sort((a,b)=>b-a);
+  const nPacks=sizesDesc.reduce((a,s)=>a+r.counts[s],0);
+  const lyo=/لیوفیلیزه/.test(p.form);
+  const next=new Date();next.setMonth(next.getMonth()+p.every);
+  const vials=sizesDesc.flatMap(s=>Array(Math.min(r.counts[s],60)).fill(s));
+  const maxS=Math.max(...p.pack.sizes);
+  $("#cres").innerHTML=heads<1?`<div class="big">تعداد رأس را وارد کنید</div>`:`
+    <div style="font-size:13.5px;opacity:.9">${p.name} · ${fa(heads)} رأس ${SP[calc.sp]} · ${d.label} برای هر رأس</div>
+    <div class="big">${fa(nPacks)} ${pk}</div>
+    <div class="vials">${vials.map((s,i)=>`<i class="${s===maxS&&p.pack.sizes.length>1?"big":""}" style="animation-delay:${i*18}ms"></i>`).join("")}${nPacks>60?`<span style="font-size:13px;align-self:center">+${fa(nPacks-60)}</span>`:""}</div>
+    <div class="row">
+      ${sizesDesc.map(s=>`<div class="box"><b>${fa(r.counts[s])} ×</b>${pk} ${fa(s)} ${p.pack.u==="ml"?"میلی‌لیتری":"دوزی"}</div>`).join("")}
+      <div class="box"><b>${fa(need)}</b>${unit} لازم</div>
+      <div class="box"><b>${fa(r.total-need)}</b>${unit} اضافه</div>
+    </div>
+    ${lyo?`<div class="nx">💧 همراه هر ویال، یک بطری حلال <b>ویرا-نورلین®</b>؛ جمعاً ${fa(nPacks)} بطری.</div>`:""}
+    <div class="nx">📅 نوبت بعدی: <b>${p.every===12?"یک سال":fa(p.every)+" ماه"} دیگر</b>، حدود ${persianDate(next)}${p.id==="peste"?"، پیش از فصل بارندگی":""}</div>`;
+}
+renderCalc();setN(100);
+
+/* ================= certificates ================= */
+let lbList=[],lbI=0;
+function renderCerts(f){
+  const list=CERTS.filter(c=>f==="all"||c.cat===f);lbList=list;
+  $("#ccount").textContent=fa(list.length)+" مورد";
+  $("#cgrid").innerHTML=list.map((c,i)=>`<button class="cert" data-ci="${i}"><div class="ph"><img src="img/certs/t${c.f.slice(1)}.jpg" alt="${c.t}" loading="lazy"></div><div class="t"><span class="org" dir="ltr">${c.org}</span><b>${c.t}</b><span class="mute">${c.d}</span></div></button>`).join("");
+}
+$("#cfilter").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;haptic();$$("#cfilter button").forEach(x=>x.classList.toggle("on",x===b));renderCerts(b.dataset.f)});
+renderCerts("all");
+$("#cgrid").addEventListener("click",e=>{const b=e.target.closest("[data-ci]");if(b)openLb(+b.dataset.ci)});
+function showLb(){const c=lbList[lbI];$("#lb").classList.remove("zoom");$("#lbImg").src=`img/certs/${c.f}.jpg`;$("#lbImg").alt=c.t;$("#lbCap").innerHTML=`<b>${c.t}</b><br><span style="opacity:.75">${c.org} · ${fa(lbI+1)} از ${fa(lbList.length)}</span>`}
+function openLb(i){haptic();lbI=i;showLb();$("#lb").classList.add("on");syncBack()}
+function closeLb(){$("#lb").classList.remove("on");syncBack()}
+$("#lbX").onclick=closeLb;
+$("#lbNext").onclick=()=>{haptic();lbI=(lbI+1)%lbList.length;showLb()};
+$("#lbPrev").onclick=()=>{haptic();lbI=(lbI-1+lbList.length)%lbList.length;showLb()};
+$("#lbImg").onclick=()=>$("#lb").classList.toggle("zoom");
+(()=>{let x0=null;const s=$("#lbSc");s.addEventListener("touchstart",e=>{x0=$("#lb").classList.contains("zoom")?null:e.touches[0].clientX},{passive:true});s.addEventListener("touchend",e=>{if(x0==null)return;const d=e.changedTouches[0].clientX-x0;if(Math.abs(d)>60)(d<0?$("#lbNext"):$("#lbPrev")).click();x0=null})})();
+
+/* ================= contact ================= */
+$("#k-tel").onclick=()=>{haptic();copy("02192001125","شماره کپی شد: ۰۲۱۹۲۰۰۱۱۲۵");if(!inTg)location.href="tel:+982192001125"};
+$("#k-mail").onclick=()=>{haptic();copy("info@viravaccine.com","ایمیل کپی شد")};
+$("#k-addr").onclick=()=>openLink("https://www.google.com/maps/search/?api=1&query="+encodeURIComponent("شهرک صنعتی سپهر نظرآباد البرز"));
+</script>
+</body>
+</html>
